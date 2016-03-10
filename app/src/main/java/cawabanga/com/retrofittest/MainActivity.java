@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                                                                  public void onResponse(Call<Weather> call, Response<Weather> response) {
                                                                      Query query = response.body().getQuery();
                                                                      tv_temperature.setText(query.getResults().getChannel().getItem().getCondition().getTemp());
+                                                                     tv_city.setText(query.getResults().getChannel().getLocation().getCity());
+                                                                     tv_date.setText(query.getResults().getChannel().getLastBuildDate());
+                                                                     tv_weather.setText(query.getResults().getChannel().getItem().getCondition().getText());
                                                                  }
 
                                                                  @Override
@@ -48,4 +51,11 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+
+    //For Automatically refresh after opening App
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onClick_bRefresh();
+    }
 }
